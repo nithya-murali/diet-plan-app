@@ -6,51 +6,54 @@ client = OpenAI(
 )
 
 # Set the page title
-st.set_page_config(page_title="Personalized Diet Plan", layout="centered")
+# Title the app
+st.title('Personalized Diet Plan')
 
-# Header
-st.title("Personalized Diet Plan")
+st.markdown("""
+ * Use the menu at left to input information of bodyvitals and diet preferences
+ * And Hang tight while we whip up a personalized diet plan just for you—healthy, tasty, and totally on point! 🍏🥗✨
+""")
 
-with st.form("diet_form"):
+with st.sidebar.form("diet_form"):
     # Basic Information
-    st.subheader("Basic Information")
-    name = st.text_input("Name")
-    age = st.number_input("Age", min_value=1, max_value=120, step=1)
-    gender = st.radio("Gender", ["Male", "Female", "Other"])
-    height = st.number_input("Height (cm)", min_value=50, max_value=250, step=1)
-    weight = st.number_input("Weight (kg)", min_value=10, max_value=300, step=1)
-    body_fat = st.slider("Body Fat Percentage", min_value=0, max_value=50, step=1)
+    st.sidebar.markdown("## Basic Information")
+    name = st.sidebar.text_input("Name")
+    age = st.sidebar.number_input("Age", min_value=1, max_value=120, step=1)
+    gender = st.sidebar.radio("Gender", ["Male", "Female", "Other"])
+    height = st.sidebar.number_input("Height (cm)", min_value=50, max_value=250, step=1)
+    weight = st.sidebar.number_input("Weight (kg)", min_value=10, max_value=300, step=1)
+    body_fat = st.sidebar.slider("Body Fat Percentage", min_value=0, max_value=50, step=1)
 
     # Activity Level
-    st.subheader("Activity Level")
-    activity_level = st.selectbox("Select your activity level", 
+    st.sidebar.markdown("## Activity Level")
+    activity_level = st.sidebar.selectbox("Select your activity level", 
                                   ["Sedentary", "Lightly Active", "Moderately Active", "Very Active"])
 
     # Health & Medical Background
-    st.subheader("Health & Medical Background")
-    conditions = st.multiselect("Do you have any health conditions?", 
+    st.sidebar.markdown("## Health & Medical Background")
+    conditions = st.sidebar.multiselect("Do you have any health conditions?", 
                                 ["Diabetes", "Hypertension", "PCOS", "Thyroid Issues", "None"])
-    medications = st.text_area("Medications/Supplements (if any)")
+    medications = st.sidebar.text_area("Medications/Supplements (if any)")
 
     # Dietary Preferences
-    st.subheader("Dietary Preferences & Restrictions")
-    diet_type = st.selectbox("Preferred Diet Type", 
+    st.sidebar.markdown("## Dietary Preferences & Restrictions")
+    diet_type = st.sidebar.selectbox("Preferred Diet Type", 
                              ["No Preference", "Vegetarian", "Vegan", "Keto", "Paleo", "Mediterranean"])
-    allergies = st.text_input("Food Allergies/Intolerances")
-    dislikes = st.text_input("Foods You Dislike")
+    allergies = st.sidebar.text_input("Food Allergies/Intolerances")
+    dislikes = st.sidebar.text_input("Foods You Dislike")
 
     # Goals & Lifestyle
-    st.subheader("Goals & Lifestyle")
-    goal = st.selectbox("Primary Goal", ["Weight Loss", "Muscle Gain", "Maintenance", "Improve Energy"])
-    target_weight = st.number_input("Target Weight (kg)", min_value=10, max_value=300, step=1)
-    meal_timing = st.selectbox("Meal Timing", ["Regular (3 meals/day)", "Intermittent Fasting", "Flexible"])
-    cooking_habits = st.radio("Do you cook at home?", ["Yes", "No", "Sometimes"])
+    st.sidebar.markdown("## Goals & Lifestyle")
+    goal = st.sidebar.selectbox("Primary Goal", ["Weight Loss", "Muscle Gain", "Maintenance", "Improve Energy"])
+    target_weight = st.sidebar.number_input("Target Weight (kg)", min_value=10, max_value=300, step=1)
+    meal_timing = st.sidebar.selectbox("Meal Timing", ["Regular (3 meals/day)", "Intermittent Fasting", "Flexible"])
+    cooking_habits = st.sidebar.radio("Do you cook at home?", ["Yes", "No", "Sometimes"])
 
     # Additional Factors
-    st.subheader("Additional Considerations")
-    hydration = st.slider("Average Daily Water Intake (Liters)", min_value=0.5, max_value=5.0, step=0.1)
-    sleep_hours = st.slider("Average Sleep per Night (Hours)", min_value=3, max_value=12, step=1)
-    stress_level = st.selectbox("Stress Level", ["Low", "Moderate", "High"])
+    st.sidebar.markdown("## Additional Considerations")
+    hydration = st.sidebar.slider("Average Daily Water Intake (Liters)", min_value=0.5, max_value=5.0, step=0.1)
+    sleep_hours = st.sidebar.slider("Average Sleep per Night (Hours)", min_value=3, max_value=12, step=1)
+    stress_level = st.sidebar.selectbox("Stress Level", ["Low", "Moderate", "High"])
 
     # Submit button
     submit_button = st.form_submit_button("Submit")
